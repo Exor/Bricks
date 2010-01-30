@@ -40,6 +40,9 @@ namespace Bricks
             base.Initialize();
         }
 
+        Texture2D ship;
+        Vector2 shipPosition = new Vector2(0, 0);
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -48,6 +51,7 @@ namespace Bricks
         {
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            ship = Content.Load<Texture2D>("ship");
 
             // TODO: use this.Content to load your game content here
         }
@@ -71,7 +75,7 @@ namespace Bricks
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
+            shipPosition.X += 1;
             // TODO: Add your update logic here
 
             base.Update(gameTime);
@@ -83,8 +87,11 @@ namespace Bricks
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.White);
 
+            spriteBatch.Begin();
+            spriteBatch.Draw(ship, shipPosition, Color.White);
+            spriteBatch.End();
             // TODO: Add your drawing code here
 
             base.Draw(gameTime);
