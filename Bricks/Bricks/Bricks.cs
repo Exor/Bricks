@@ -55,7 +55,7 @@ namespace Bricks
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             spriteBatch.Draw(ball, new Vector2(500, 200), Color.White);
             spriteBatch.Draw(brick, new Vector2(100, 100), Color.Yellow);
             spriteBatch.Draw(paddle, new Vector2(300, 300), Color.Tomato);
