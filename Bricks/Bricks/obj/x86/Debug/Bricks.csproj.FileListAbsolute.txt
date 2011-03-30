@@ -1,0 +1,6 @@
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\bin\x86\Debug\Bricks.exe
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\bin\x86\Debug\Bricks.pdb
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\obj\x86\Debug\Bricks.exe
+C:\VisualStudioProjects\Bricks\Bricks\Bricks\obj\x86\Debug\Bricks.pdb
