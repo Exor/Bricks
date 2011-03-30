@@ -1,7 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bricks", "Bricks\Bricks.csproj", "{42CF4304-688A-452B-888A-E1350758D899}"
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010 Express for Windows Phone
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bricks", "Bricks\Bricks\Bricks.csproj", "{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BricksContent", "Bricks\BricksContent\BricksContent.contentproj", "{98C63BDE-F217-4B26-8F7E-137D45E7736B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +11,12 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{42CF4304-688A-452B-888A-E1350758D899}.Debug|x86.ActiveCfg = Debug|x86
-		{42CF4304-688A-452B-888A-E1350758D899}.Debug|x86.Build.0 = Debug|x86
-		{42CF4304-688A-452B-888A-E1350758D899}.Release|x86.ActiveCfg = Release|x86
-		{42CF4304-688A-452B-888A-E1350758D899}.Release|x86.Build.0 = Release|x86
-		{EF8A1CC8-3CC8-463F-A462-6DF424C484DB}.Debug|x86.ActiveCfg = Debug|x86
-		{EF8A1CC8-3CC8-463F-A462-6DF424C484DB}.Release|x86.ActiveCfg = Release|x86
+		{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}.Debug|x86.ActiveCfg = Debug|x86
+		{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}.Debug|x86.Build.0 = Debug|x86
+		{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}.Release|x86.ActiveCfg = Release|x86
+		{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}.Release|x86.Build.0 = Release|x86
+		{98C63BDE-F217-4B26-8F7E-137D45E7736B}.Debug|x86.ActiveCfg = Debug|x86
+		{98C63BDE-F217-4B26-8F7E-137D45E7736B}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
