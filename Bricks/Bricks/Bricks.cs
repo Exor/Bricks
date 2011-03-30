@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using XELibrary;
 
 namespace Bricks
 {
@@ -20,10 +21,19 @@ namespace Bricks
         Texture2D brick;
         Texture2D paddle;
 
+        FPS fps;
+        InputHandler inputHandler;
+
         public Bricks()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            fps = new FPS(this);
+            Components.Add(fps);
+
+            inputHandler = new InputHandler(this);
+            Components.Add(inputHandler);
         }
 
         protected override void Initialize()
@@ -46,7 +56,7 @@ namespace Bricks
 
         protected override void Update(GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (inputHandler.Keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
             base.Update(gameTime);

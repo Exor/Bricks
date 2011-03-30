@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bricks", "Bricks\Bricks\Bri
 EndProject
 Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "BricksContent", "Bricks\BricksContent\BricksContent.contentproj", "{98C63BDE-F217-4B26-8F7E-137D45E7736B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XELibrary", "XELibrary\XELibrary.csproj", "{4ECCA22F-67D6-4657-8B6E-8BB552BBBF65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -17,6 +19,10 @@ Global
 		{DFA61F9B-1FCF-4EEC-B7D3-03CD412EE28F}.Release|x86.Build.0 = Release|x86
 		{98C63BDE-F217-4B26-8F7E-137D45E7736B}.Debug|x86.ActiveCfg = Debug|x86
 		{98C63BDE-F217-4B26-8F7E-137D45E7736B}.Release|x86.ActiveCfg = Release|x86
+		{4ECCA22F-67D6-4657-8B6E-8BB552BBBF65}.Debug|x86.ActiveCfg = Debug|x86
+		{4ECCA22F-67D6-4657-8B6E-8BB552BBBF65}.Debug|x86.Build.0 = Debug|x86
+		{4ECCA22F-67D6-4657-8B6E-8BB552BBBF65}.Release|x86.ActiveCfg = Release|x86
+		{4ECCA22F-67D6-4657-8B6E-8BB552BBBF65}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
