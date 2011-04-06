@@ -24,6 +24,8 @@ namespace Bricks
         FPS fps;
         InputHandler inputHandler;
 
+        Vector2 ballPosition = new Vector2(100,200);
+
         public Bricks()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -35,8 +37,13 @@ namespace Bricks
             inputHandler = new InputHandler(this);
             Components.Add(inputHandler);
 
-            graphics.PreferredBackBufferWidth = 640; // sets the game resolution
+            // sets the game resolution
+            graphics.PreferredBackBufferWidth = 640;
             graphics.PreferredBackBufferHeight = 960;
+
+            // makes the refresh rate the same as the monitors refresh rate
+            //this.graphics.SynchronizeWithVerticalRetrace = true;
+            //this.IsFixedTimeStep = true;
         }
 
         protected override void Initialize()
@@ -62,6 +69,10 @@ namespace Bricks
             if (inputHandler.Keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            // arbitrary movement
+            ballPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
+            ballPosition.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
+
             base.Update(gameTime);
         }
 
@@ -69,7 +80,7 @@ namespace Bricks
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            spriteBatch.Draw(ball, new Vector2(500, 200), Color.White);
+            spriteBatch.Draw(ball, ballPosition, Color.White);
             spriteBatch.Draw(brick, new Vector2(100, 100), Color.Yellow);
             spriteBatch.Draw(paddle, new Vector2(300, 300), Color.Tomato);
 
