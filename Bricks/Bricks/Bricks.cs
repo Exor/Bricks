@@ -26,6 +26,9 @@ namespace Bricks
 
         Vector2 ballPosition = new Vector2(100,200);
 
+        int yDirection = 1;
+        int xDirection = 1;
+
         public Bricks()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -70,14 +73,24 @@ namespace Bricks
                 this.Exit();
 
             // arbitrary movement
-            ballPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
-            ballPosition.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
+            ballPosition.X += xDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
+            ballPosition.Y += yDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
 
+            // boundary collision direction change
+            if (ballPosition.X >= Window.ClientBounds.Width - ball.Width)
+                xDirection = -1;
+            if (ballPosition.X <= 0)
+                xDirection = 1;
+            if (ballPosition.Y >= Window.ClientBounds.Height - ball.Height)
+                yDirection = -1;
+            if (ballPosition.Y <= 0)
+                yDirection = 1;
+            
             // simple prevention of movement outside the window
-            ballPosition.X = MathHelper.Clamp(ballPosition.X, 0, 
-                Window.ClientBounds.Width - ball.Width);
-            ballPosition.Y = MathHelper.Clamp(ballPosition.Y, 0,
-                Window.ClientBounds.Height - ball.Height);
+            //ballPosition.X = MathHelper.Clamp(ballPosition.X, 0, 
+            //    Window.ClientBounds.Width - ball.Width);
+            //ballPosition.Y = MathHelper.Clamp(ballPosition.Y, 0,
+            //    Window.ClientBounds.Height - ball.Height);
 
             base.Update(gameTime);
         }
