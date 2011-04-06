@@ -73,6 +73,12 @@ namespace Bricks
             ballPosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
             ballPosition.Y += (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
 
+            // simple prevention of movement outside the window
+            ballPosition.X = MathHelper.Clamp(ballPosition.X, 0, 
+                Window.ClientBounds.Width - ball.Width);
+            ballPosition.Y = MathHelper.Clamp(ballPosition.Y, 0,
+                Window.ClientBounds.Height - ball.Height);
+
             base.Update(gameTime);
         }
 
