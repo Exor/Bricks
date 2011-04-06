@@ -34,6 +34,9 @@ namespace Bricks
 
             inputHandler = new InputHandler(this);
             Components.Add(inputHandler);
+
+            graphics.PreferredBackBufferWidth = 640; // sets the game resolution
+            graphics.PreferredBackBufferHeight = 960;
         }
 
         protected override void Initialize()

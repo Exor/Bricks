@@ -1,1 +1,0 @@
-C:\VisualStudioProjects\Bricks\Bricks\BricksContent\obj\x86\Debug\ResolveAssemblyReference.cache

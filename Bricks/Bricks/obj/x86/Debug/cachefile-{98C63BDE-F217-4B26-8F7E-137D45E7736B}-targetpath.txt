@@ -1,3 +1,0 @@
-Content\ball.xnb
-Content\brick.xnb
-Content\paddle.xnb
