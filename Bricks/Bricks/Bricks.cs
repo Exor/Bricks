@@ -25,6 +25,7 @@ namespace Bricks
         InputHandler inputHandler;
 
         Vector2 ballPosition = new Vector2(100,200);
+        Vector2 paddlePosition = new Vector2(290, 920);
 
         int yDirection = 1;
         int xDirection = 1;
@@ -72,11 +73,21 @@ namespace Bricks
             if (inputHandler.Keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
-            // arbitrary movement
-            ballPosition.X += xDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
-            ballPosition.Y += yDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 100;
+            // movement from keyboard input (paddle)
+            if (inputHandler.Keyboard.IsKeyDown(Keys.Left))
+            {
+                paddlePosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 700;
+            }
+            if (inputHandler.Keyboard.IsKeyDown(Keys.Right))
+            {
+                paddlePosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 700;
+            }
 
-            // boundary collision direction change
+            // arbitrary movement (ball)
+            ballPosition.X += xDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
+            ballPosition.Y += yDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
+
+            // boundary collision direction change (ball)
             if (ballPosition.X >= Window.ClientBounds.Width - ball.Width)
                 xDirection = -1;
             if (ballPosition.X <= 0)
@@ -86,11 +97,11 @@ namespace Bricks
             if (ballPosition.Y <= 0)
                 yDirection = 1;
             
-            // simple prevention of movement outside the window
-            //ballPosition.X = MathHelper.Clamp(ballPosition.X, 0, 
-            //    Window.ClientBounds.Width - ball.Width);
-            //ballPosition.Y = MathHelper.Clamp(ballPosition.Y, 0,
-            //    Window.ClientBounds.Height - ball.Height);
+            // prevention of movement outside the window (paddle)
+            paddlePosition.X = MathHelper.Clamp(paddlePosition.X, 0, 
+                Window.ClientBounds.Width - paddle.Width);
+            //paddlePosition.Y = MathHelper.Clamp(paddlePosition.Y, 0,
+            //    Window.ClientBounds.Height - paddle.Height);
 
             base.Update(gameTime);
         }
@@ -101,7 +112,7 @@ namespace Bricks
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             spriteBatch.Draw(ball, ballPosition, Color.White);
             spriteBatch.Draw(brick, new Vector2(100, 100), Color.Yellow);
-            spriteBatch.Draw(paddle, new Vector2(300, 300), Color.Tomato);
+            spriteBatch.Draw(paddle, paddlePosition, Color.Tomato);
 
             spriteBatch.End();
 
