@@ -24,11 +24,9 @@ namespace Bricks
         FPS fps;
         InputHandler inputHandler;
 
-        Vector2 ballPosition = new Vector2(100,200);
+        Vector2 ballPosition = new Vector2(100, 200);
         Vector2 paddlePosition = new Vector2(290, 920);
-
-        int yDirection = 1;
-        int xDirection = 1;
+        Vector2 ballDirection = new Vector2(1, 1);
 
         public Bricks()
         {
@@ -84,18 +82,30 @@ namespace Bricks
             }
 
             // arbitrary movement (ball)
-            ballPosition.X += xDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
-            ballPosition.Y += yDirection * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
+            ballPosition.X += ballDirection.X * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
+            ballPosition.Y += ballDirection.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
 
             // boundary collision direction change (ball)
             if (ballPosition.X >= Window.ClientBounds.Width - ball.Width)
-                xDirection = -1;
+            {
+                ballPosition.X = Window.ClientBounds.Width - ball.Width;
+                ballDirection.X *= -1;
+            }
             if (ballPosition.X <= 0)
-                xDirection = 1;
+            {
+                ballPosition.X = 0;
+                ballDirection.X *= -1;
+            } 
             if (ballPosition.Y >= Window.ClientBounds.Height - ball.Height)
-                yDirection = -1;
+            {
+                ballPosition.Y = Window.ClientBounds.Height - ball.Height;
+                ballDirection.Y *= -1;
+            }
             if (ballPosition.Y <= 0)
-                yDirection = 1;
+            {
+                ballPosition.Y = 0;
+                ballDirection.Y *= -1;
+            }
             
             // prevention of movement outside the window (paddle)
             paddlePosition.X = MathHelper.Clamp(paddlePosition.X, 0, 
@@ -114,7 +124,8 @@ namespace Bricks
             {
                 if (ballRectangle.Center.X > paddleRectange.Left && ballRectangle.Center.X < paddleRectange.Right)
                 {
-                    yDirection = -1;
+                    ballPosition.Y = paddleRectange.Top - ball.Height;
+                    ballDirection.Y *= -1;
                 }
             }
 
