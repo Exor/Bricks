@@ -100,8 +100,23 @@ namespace Bricks
             // prevention of movement outside the window (paddle)
             paddlePosition.X = MathHelper.Clamp(paddlePosition.X, 0, 
                 Window.ClientBounds.Width - paddle.Width);
-            //paddlePosition.Y = MathHelper.Clamp(paddlePosition.Y, 0,
-            //    Window.ClientBounds.Height - paddle.Height);
+
+            // Collision (ball and paddle)
+            Rectangle paddleRectange =
+                new Rectangle((int)paddlePosition.X, (int)paddlePosition.Y, 
+                paddle.Width, paddle.Height);
+
+            Rectangle ballRectangle =
+                new Rectangle((int)ballPosition.X, (int)ballPosition.Y,
+                ball.Width, ball.Height);
+
+            if (ballPosition.Y >= paddleRectange.Top - ball.Height)
+            {
+                if (ballRectangle.Center.X > paddleRectange.Left && ballRectangle.Center.X < paddleRectange.Right)
+                {
+                    yDirection = -1;
+                }
+            }
 
             base.Update(gameTime);
         }
