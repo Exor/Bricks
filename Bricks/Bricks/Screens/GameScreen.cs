@@ -22,6 +22,8 @@ namespace Bricks
         Vector2 paddlePosition = new Vector2(290, 920);
         Vector2 ballDirection = new Vector2(1, 1);
 
+        int ballSpeed = 700;
+
         bool moveLeft;
         bool moveRight;
 
@@ -63,9 +65,9 @@ namespace Bricks
         public override void Update(GameTime gameTime, bool shouldTransitionOff)
         {
             if (moveLeft)
-                paddlePosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * 700;
+                paddlePosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
             if (moveRight)
-                paddlePosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * 700;
+                paddlePosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
 
             // arbitrary movement (ball)
             ballPosition.X += ballDirection.X * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
