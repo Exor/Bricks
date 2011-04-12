@@ -21,6 +21,8 @@ namespace Bricks
         Vector2 paddlePosition = new Vector2(290, 920);
         Vector2 ballDirection = new Vector2(1, 1);
 
+        Level1 level;
+
         int ballSpeed = 700;
 
         bool moveLeft;
@@ -39,6 +41,10 @@ namespace Bricks
 
             ball = content.Load<Texture2D>("ball");
             paddle = content.Load<Texture2D>("paddle");
+
+            level = new Level1(ScreenManager.Game);
+            ScreenManager.Game.Components.Add(level);
+
             base.LoadContent();
         }
 
@@ -62,6 +68,7 @@ namespace Bricks
 
         public override void Update(GameTime gameTime, bool shouldTransitionOff)
         {
+
             if (moveLeft)
                 paddlePosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
             if (moveRight)
