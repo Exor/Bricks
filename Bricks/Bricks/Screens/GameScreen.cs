@@ -15,7 +15,6 @@ namespace Bricks
         ContentManager content;
 
         Texture2D ball;
-        Texture2D brick;
         Texture2D paddle;
 
         Vector2 ballPosition = new Vector2(100, 200);
@@ -39,7 +38,6 @@ namespace Bricks
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
             ball = content.Load<Texture2D>("ball");
-            brick = content.Load<Texture2D>("brick");
             paddle = content.Load<Texture2D>("paddle");
             base.LoadContent();
         }
@@ -129,7 +127,6 @@ namespace Bricks
             ScreenManager.GraphicsDevice.Clear(Color.White);
             ScreenManager.SpriteBatch.Begin();
             ScreenManager.SpriteBatch.Draw(ball, ballPosition, Color.White);
-            ScreenManager.SpriteBatch.Draw(brick, new Vector2(100, 100), Color.Yellow);
             ScreenManager.SpriteBatch.Draw(paddle, paddlePosition, Color.Tomato);
             ScreenManager.SpriteBatch.End();
             base.Draw(gameTime);
