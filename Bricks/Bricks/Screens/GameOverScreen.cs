@@ -20,7 +20,7 @@ namespace Bricks
         public GameOverScreen()
         {
             TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            TransitionOffTime = TimeSpan.FromSeconds(0.5);
+            TransitionOffTime = TimeSpan.FromSeconds(0.0);
         }
 
         public override void HandleInput(InputHandler input)

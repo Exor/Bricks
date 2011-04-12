@@ -14,19 +14,9 @@ namespace Bricks
     {
         ContentManager content;
 
-        Texture2D ball;
-        Texture2D paddle;
-
-        Vector2 ballPosition = new Vector2(100, 200);
-        Vector2 paddlePosition = new Vector2(290, 920);
-        Vector2 ballDirection = new Vector2(1, 1);
-
         Level1 level;
-
-        int ballSpeed = 700;
-
-        bool moveLeft;
-        bool moveRight;
+        Ball ball;
+        Paddle paddle;
 
         public GameScreen()
         {
@@ -39,11 +29,12 @@ namespace Bricks
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            ball = content.Load<Texture2D>("ball");
-            paddle = content.Load<Texture2D>("paddle");
-
             level = new Level1(ScreenManager.Game);
-            ScreenManager.Game.Components.Add(level);
+            level.LoadContent(content);
+            ball = new Ball();
+            ball.LoadContent(content);
+            paddle = new Paddle();
+            paddle.LoadContent(content);
 
             base.LoadContent();
         }
@@ -54,77 +45,28 @@ namespace Bricks
                 ScreenManager.AddScreen(new PauseScreen());
 
             // movement from keyboard input (paddle)
-            moveLeft = false;
-            moveRight = false;
             if (input.Keyboard.IsKeyDown(Keys.Left))
             {
-                moveLeft = true;
+                paddle.MoveLeft();
             }
-            if (input.Keyboard.IsKeyDown(Keys.Right))
+            else if (input.Keyboard.IsKeyDown(Keys.Right))
             {
-                moveRight = true;
+                paddle.MoveRight();
+            }
+            else
+            {
+                paddle.DoNotMove();
             }
         }
 
         public override void Update(GameTime gameTime, bool shouldTransitionOff)
         {
+            ball.Update(gameTime);
+            paddle.Update(gameTime);
+            level.Update(gameTime);
+            UpdateCollisions();
 
-            if (moveLeft)
-                paddlePosition.X -= (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
-            if (moveRight)
-                paddlePosition.X += (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
-
-            // arbitrary movement (ball)
-            ballPosition.X += ballDirection.X * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
-            ballPosition.Y += ballDirection.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * 500;
-
-            // boundary collision direction change (ball)
-            if (ballPosition.X >= ScreenManager.GraphicsDevice.Viewport.Width - ball.Width)
-            {
-                ballPosition.X = ScreenManager.GraphicsDevice.Viewport.Width - ball.Width;
-                ballDirection.X *= -1;
-            }
-            if (ballPosition.X <= 0)
-            {
-                ballPosition.X = 0;
-                ballDirection.X *= -1;
-            }
-            if (ballPosition.Y >= ScreenManager.GraphicsDevice.Viewport.Height)
-            {
-                //Game over
-                ScreenManager.RemoveScreen(this);
-                ScreenManager.AddScreen(new GameOverScreen());
-
-                //ballPosition.Y = ScreenManager.GraphicsDevice.Viewport.Height + ball.Height;
-                //ballDirection.Y *= -1;
-            }
-            if (ballPosition.Y <= 0)
-            {
-                ballPosition.Y = 0;
-                ballDirection.Y *= -1;
-            }
-
-            // prevention of movement outside the window (paddle)
-            paddlePosition.X = MathHelper.Clamp(paddlePosition.X, 0,
-                ScreenManager.GraphicsDevice.Viewport.Width - paddle.Width);
-
-            // Collision (ball and paddle)
-            Rectangle paddleRectange =
-                new Rectangle((int)paddlePosition.X, (int)paddlePosition.Y,
-                paddle.Width, paddle.Height);
-
-            Rectangle ballRectangle =
-                new Rectangle((int)ballPosition.X, (int)ballPosition.Y,
-                ball.Width, ball.Height);
-
-            if (ballPosition.Y >= paddleRectange.Top - ball.Height)
-            {
-                if (ballRectangle.Center.X > paddleRectange.Left && ballRectangle.Center.X < paddleRectange.Right)
-                {
-                    ballPosition.Y = paddleRectange.Top - ball.Height;
-                    ballDirection.Y *= -1;
-                }
-            }
+            //UpdateHud();
 
             base.Update(gameTime, shouldTransitionOff);
         }
@@ -133,10 +75,25 @@ namespace Bricks
         {
             ScreenManager.GraphicsDevice.Clear(Color.White);
             ScreenManager.SpriteBatch.Begin();
-            ScreenManager.SpriteBatch.Draw(ball, ballPosition, Color.White);
-            ScreenManager.SpriteBatch.Draw(paddle, paddlePosition, Color.Tomato);
+
+            ball.Draw(ScreenManager.SpriteBatch);
+            paddle.Draw(ScreenManager.SpriteBatch);
+            level.Draw(ScreenManager.SpriteBatch);
+
             ScreenManager.SpriteBatch.End();
             base.Draw(gameTime);
+        }
+
+        private void UpdateCollisions()
+        {
+            paddle.CheckForCollisionAtScreenBoundries(ScreenManager.GraphicsDevice.Viewport.Width);
+            ball.CheckForCollisionAtScreenBoundries(ScreenManager.GraphicsDevice.Viewport.Width, ScreenManager.GraphicsDevice.Viewport.Height);
+            ball.CheckForCollisionBetweenBallAndPaddle(paddle.BoundingRectangle);
+            
+            foreach (Brick brick in level.Bricks)
+            {
+                ball.CheckForCollisionBetweenBallAndRectangle(brick.BoundingRectangle);
+            }
         }
     }
 }
