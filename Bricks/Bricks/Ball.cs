@@ -80,6 +80,7 @@ namespace Bricks
                 {
                     ballPosition.Y = paddleRectangle.Top - ball.Height;
                     ballDirection.Y *= -1;
+                    ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
                 }
             }
         }
