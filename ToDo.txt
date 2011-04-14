@@ -1,7 +1,9 @@
-Implement new ball class to do better collision detection with bricks
+Implement new ball class to do better collision detection with bricks and paddle
 
 Create additional levels
 
 Make a 'level victory' check
 
-Redo paddle collisions to prevent the ball bouncing up from below the paddle
+Load the next level when the first one is finished
+
+Done - Redo paddle collisions to prevent the ball bouncing up from below the paddle
