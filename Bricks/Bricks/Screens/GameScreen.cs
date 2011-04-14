@@ -14,9 +14,11 @@ namespace Bricks
     {
         ContentManager content;
 
+        Player player;
         Level1 level;
         Ball ball;
         Paddle paddle;
+        Hud hud;
 
         public GameScreen()
         {
@@ -29,12 +31,11 @@ namespace Bricks
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            level = new Level1(ScreenManager.Game);
-            level.LoadContent(content);
-            ball = new Ball();
-            ball.LoadContent(content);
-            paddle = new Paddle();
-            paddle.LoadContent(content);
+            player = new Player(3);
+            level = new Level1(ScreenManager.Game, content);
+            ball = new Ball(content);
+            paddle = new Paddle(content);
+            hud = new Hud(content, level.Name, player.Lives, player.Score);
 
             base.LoadContent();
         }
@@ -64,9 +65,8 @@ namespace Bricks
             ball.Update(gameTime);
             paddle.Update(gameTime);
             level.Update(gameTime);
+            hud.Update(gameTime, player.Score, player.Lives);
             UpdateCollisions();
-
-            //UpdateHud();
 
             base.Update(gameTime, shouldTransitionOff);
         }
@@ -79,6 +79,7 @@ namespace Bricks
             ball.Draw(ScreenManager.SpriteBatch);
             paddle.Draw(ScreenManager.SpriteBatch);
             level.Draw(ScreenManager.SpriteBatch);
+            hud.Draw(ScreenManager.SpriteBatch);
 
             ScreenManager.SpriteBatch.End();
             base.Draw(gameTime);
@@ -93,7 +94,10 @@ namespace Bricks
             foreach (Brick brick in level.Bricks)
             {
                 if (ball.CheckForCollisionBetweenBallAndRectangle(brick.BoundingRectangle))
+                {
                     brick.Hit = true;
+                    player.Score += brick.PointValue;
+                }
             }
             level.RemoveBricks();
         }

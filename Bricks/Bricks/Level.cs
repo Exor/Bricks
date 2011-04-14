@@ -15,6 +15,12 @@ namespace Bricks
         List<Brick> bricksCopy = new List<Brick>();
         protected Game game;
         protected Texture2D texture;
+        protected string levelName;
+
+        public string Name
+        {
+            get { return levelName; }
+        }
 
         public List<Brick> Bricks
         {
@@ -22,6 +28,12 @@ namespace Bricks
         }
 
         public Level() { }
+
+        public Level(Game Game, ContentManager content)
+            :this(Game)
+        {
+            
+        }
 
         public Level(Game Game)
         {

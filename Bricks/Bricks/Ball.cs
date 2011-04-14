@@ -11,8 +11,8 @@ namespace Bricks
     public class Ball
     {
         Texture2D ball;
-        Vector2 ballPosition = new Vector2(300, 100);
-        Vector2 ballDirection = new Vector2(1, 1);
+        Vector2 ballPosition = new Vector2(300, 600);
+        Vector2 ballDirection = new Vector2(1, -1);
         int ballSpeed = 500;
 
         public Rectangle BoundingRectangle
@@ -25,9 +25,9 @@ namespace Bricks
             get { return ballSpeed; }
         }
 
-        public Ball()
+        public Ball(ContentManager content)
         {
-            
+            LoadContent(content);
         }
 
         public void LoadContent(ContentManager content)
@@ -72,17 +72,38 @@ namespace Bricks
             }
         }
 
-        public void CheckForCollisionBetweenBallAndPaddle(Rectangle paddleRectangle)
+        public bool CheckForCollisionBetweenBallAndPaddle(Rectangle paddleRectangle)
         {
-            if (ballPosition.Y >= paddleRectangle.Top - ball.Height)
+            if (BoundingRectangle.Intersects(paddleRectangle))
             {
-                if (BoundingRectangle.Center.X > paddleRectangle.Left && BoundingRectangle.Center.X < paddleRectangle.Right)
+                Vector2 ballOverlap = RectangleHelper.GetSignedOverlap(BoundingRectangle, paddleRectangle);
+                if (Math.Abs(ballOverlap.X) > Math.Abs(ballOverlap.Y))
                 {
-                    ballPosition.Y = paddleRectangle.Top - ball.Height;
+                    //push the ball off the paddle
+                    ballPosition.Y += ballOverlap.Y;
+                    //bounce the ball up
                     ballDirection.Y *= -1;
                     ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
                 }
+                else
+                {
+                    //push the ball off the paddle
+                    ballPosition.X += ballOverlap.X;
+                    //bounce the ball sideways
+                    ballDirection.X *= -1;
+                }
+                return true;
             }
+            return false;
+            //if (ballPosition.Y >= paddleRectangle.Top - ball.Height)
+            //{
+            //    if (BoundingRectangle.Center.X > paddleRectangle.Left && BoundingRectangle.Center.X < paddleRectangle.Right)
+            //    {
+            //        ballPosition.Y = paddleRectangle.Top - ball.Height;
+            //        ballDirection.Y *= -1;
+            //        ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
+            //    }
+            //}
         }
 
         public bool CheckForCollisionBetweenBallAndRectangle(Rectangle rectangle)

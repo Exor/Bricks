@@ -22,9 +22,9 @@ namespace Bricks
         }
 
 
-        public Paddle()
+        public Paddle(ContentManager content)
         {
-
+            LoadContent(content);
         }
 
         public void LoadContent(ContentManager content)

@@ -10,6 +10,12 @@ namespace Bricks
 {
     public class Brick
     {
+        int pointValue;
+        public int PointValue
+        {
+            get { return pointValue; }
+        }
+
         Texture2D brickTexture;
         public Texture2D BrickTexture
         {
@@ -41,11 +47,12 @@ namespace Bricks
             get { return new Rectangle((int)position.X, (int)position.Y, brickTexture.Width, brickTexture.Height); }
         }
 
-        public Brick(Texture2D BrickTexture, Vector2 Position, Color Color)
+        public Brick(Texture2D BrickTexture, Vector2 Position, Color Color, int PointValue)
         {
             brickTexture = BrickTexture;
             position = Position;
             color = Color;
+            pointValue = PointValue;
         }
     }
 }
