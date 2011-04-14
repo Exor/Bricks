@@ -1,0 +1,3 @@
+The ball doesn't reflect properly when colliding with the corners of a brick or the paddle.
+
+Ball bounces up from the bottom of the playfield. Instead it should subtract a life and reset.
