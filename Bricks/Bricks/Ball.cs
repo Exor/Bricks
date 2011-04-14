@@ -84,7 +84,7 @@ namespace Bricks
             }
         }
 
-        public void CheckForCollisionBetweenBallAndRectangle(Rectangle rectangle)
+        public bool CheckForCollisionBetweenBallAndRectangle(Rectangle rectangle)
         {
             //Check if they intersect before doing any calculations
             if (BoundingRectangle.Intersects(rectangle))
@@ -106,8 +106,9 @@ namespace Bricks
                     //reflect the ball
                     ballDirection.Y *= -1;
                 }
-
+                return true;
             }
+            return false;
         }
     }
 }

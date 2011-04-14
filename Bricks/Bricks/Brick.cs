@@ -29,6 +29,13 @@ namespace Bricks
             get { return color; }
         }
 
+        bool hit;
+        public bool Hit
+        {
+            get { return hit; }
+            set { hit = value; }
+        }
+
         public Rectangle BoundingRectangle
         {
             get { return new Rectangle((int)position.X, (int)position.Y, brickTexture.Width, brickTexture.Height); }

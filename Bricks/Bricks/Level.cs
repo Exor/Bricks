@@ -12,6 +12,7 @@ namespace Bricks
     public abstract class Level
     {
         protected List<Brick> bricks;
+        List<Brick> bricksCopy = new List<Brick>();
         protected Game game;
         protected Texture2D texture;
 
@@ -49,6 +50,23 @@ namespace Bricks
             {
                 spriteBatch.Draw(brick.BrickTexture, brick.Position, brick.Color);
             }
+        }
+
+        public void RemoveBricks()
+        {
+            foreach (Brick brick in bricks)
+            {
+                bricksCopy.Add(brick);
+            }
+
+            while (bricksCopy.Count > 0)
+            {
+                Brick currentBrick = bricksCopy[bricksCopy.Count - 1];
+                if (currentBrick.Hit)
+                    RemoveBrick(currentBrick);
+                bricksCopy.Remove(currentBrick);
+            }
+
         }
 
         public void RemoveBrick(Brick brick)

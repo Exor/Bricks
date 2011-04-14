@@ -92,8 +92,10 @@ namespace Bricks
             
             foreach (Brick brick in level.Bricks)
             {
-                ball.CheckForCollisionBetweenBallAndRectangle(brick.BoundingRectangle);
+                if (ball.CheckForCollisionBetweenBallAndRectangle(brick.BoundingRectangle))
+                    brick.Hit = true;
             }
+            level.RemoveBricks();
         }
     }
 }
