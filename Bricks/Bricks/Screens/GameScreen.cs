@@ -58,6 +58,12 @@ namespace Bricks
             {
                 paddle.DoNotMove();
             }
+
+            // ball launch
+            if (input.Keyboard.IsKeyDown(Keys.Space))
+            {
+                ball.Launch(paddle.BoundingRectangle);
+            }
         }
 
         public override void Update(GameTime gameTime, bool shouldTransitionOff)

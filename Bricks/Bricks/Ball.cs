@@ -11,8 +11,8 @@ namespace Bricks
     public class Ball
     {
         Texture2D ball;
-        Vector2 ballPosition = new Vector2(300, 600);
-        Vector2 ballDirection = new Vector2(1, -1);
+        Vector2 ballPosition = new Vector2(315, 890);
+        Vector2 ballDirection = new Vector2(0, 0);
         int ballSpeed = 500;
 
         public Rectangle BoundingRectangle
@@ -37,7 +37,7 @@ namespace Bricks
 
         public void Update(GameTime gameTime)
         {
-            // arbitrary movement (ball)
+            // movement (ball)
             ballPosition.X += ballDirection.X * (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
             ballPosition.Y += ballDirection.Y * (float)gameTime.ElapsedGameTime.TotalSeconds * ballSpeed;
         }
@@ -45,6 +45,27 @@ namespace Bricks
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(ball, ballPosition, Color.White);
+        }
+
+        public void Launch(Rectangle paddleRectangle)
+        {
+            if (ballDirection.Y == 0)
+            {
+                ballDirection.Y = -1;
+                
+                // spiffy stuff if we want a unique launch
+                /*
+                Vector2 ballOverlap = RectangleHelper.GetSignedOverlap(BoundingRectangle, paddleRectangle);
+                if (Math.Abs(ballOverlap.X) > Math.Abs(ballOverlap.Y))
+                {
+                    ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
+                }
+                else
+                {
+
+                }
+                */
+            }
         }
 
         public void CheckForCollisionAtScreenBoundries(int screenBoundryX, int screenBoundryY)
