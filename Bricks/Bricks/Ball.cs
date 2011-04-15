@@ -52,19 +52,22 @@ namespace Bricks
             if (ballDirection.Y == 0)
             {
                 ballDirection.Y = -1;
-                
-                // spiffy stuff if we want a unique launch
-                /*
-                Vector2 ballOverlap = RectangleHelper.GetSignedOverlap(BoundingRectangle, paddleRectangle);
-                if (Math.Abs(ballOverlap.X) > Math.Abs(ballOverlap.Y))
+
+                if (BoundingRectangle.Center.X > paddleRectangle.Left && BoundingRectangle.Center.X < paddleRectangle.Right)
                 {
                     ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
                 }
                 else
                 {
-
+                    if (BoundingRectangle.Center.X < paddleRectangle.Left)
+                    {
+                        ballDirection.X = (float) -1.5;
+                    }
+                    if (BoundingRectangle.Center.X > paddleRectangle.Right)
+                    {
+                        ballDirection.X = (float) 1.5;
+                    }
                 }
-                */
             }
         }
 
