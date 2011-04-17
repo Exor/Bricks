@@ -86,5 +86,12 @@ namespace Bricks
             bricks.Remove(brick);
         }
 
+        public void VictoryCheck()
+        {
+            if (bricks.Count == 0)
+            {
+                // level = won, move to next level
+            }
+        }
     }
 }

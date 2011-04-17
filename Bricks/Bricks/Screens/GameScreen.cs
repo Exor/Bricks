@@ -73,6 +73,8 @@ namespace Bricks
             level.Update(gameTime);
             hud.Update(gameTime, player.Score, player.Lives);
             UpdateCollisions();
+            level.RemoveBricks();
+            level.VictoryCheck();
 
             base.Update(gameTime, shouldTransitionOff);
         }
@@ -105,7 +107,6 @@ namespace Bricks
                     player.Score += brick.PointValue;
                 }
             }
-            level.RemoveBricks();
         }
     }
 }
