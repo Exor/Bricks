@@ -36,10 +36,11 @@ namespace Bricks
             font = content.Load<SpriteFont>("Font");
         }
 
-        public void Update(GameTime gameTime, int CurrentScore, int remainingLives)
+        public void Update(GameTime gameTime, int CurrentScore, int remainingLives, string currentLevelName)
         {
             score = CurrentScore;
             lives = remainingLives;
+            levelName = currentLevelName;
         }
 
         public void Draw(SpriteBatch spriteBatch)

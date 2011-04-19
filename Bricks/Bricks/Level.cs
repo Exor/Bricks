@@ -53,7 +53,7 @@ namespace Bricks
 
         public void Update(GameTime gameTime)
         {
-
+            RemoveBricks();
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
@@ -86,12 +86,13 @@ namespace Bricks
             bricks.Remove(brick);
         }
 
-        public void VictoryCheck()
+        public bool IsLevelFinished()
         {
             if (bricks.Count == 0)
             {
-                // level = won, move to next level
+                return true;
             }
+            return false;
         }
     }
 }

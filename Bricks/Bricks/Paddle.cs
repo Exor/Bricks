@@ -11,8 +11,8 @@ namespace Bricks
     public class Paddle
     {
         Texture2D paddle;
-        Vector2 paddlePosition = new Vector2(290, 920);
-        int paddleSpeed = 700;
+        Vector2 paddlePosition;
+        int paddleSpeed;
         bool moveRight;
         bool moveLeft;
 
@@ -21,10 +21,16 @@ namespace Bricks
             get { return new Rectangle((int)paddlePosition.X, (int)paddlePosition.Y, paddle.Width, paddle.Height); }
         }
 
-
         public Paddle(ContentManager content)
         {
             LoadContent(content);
+            Reset();
+        }
+
+        public void Reset()
+        {
+            paddlePosition = new Vector2(290, 920);
+            paddleSpeed = 700;
         }
 
         public void LoadContent(ContentManager content)

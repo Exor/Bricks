@@ -14,8 +14,10 @@ namespace Bricks
     {
         ContentManager content;
 
+        List<Level> levels;
+        Level currentLevel;
+        int levelCounter = 0;
         Player player;
-        Level1 level;
         Ball ball;
         Paddle paddle;
         Hud hud;
@@ -31,11 +33,12 @@ namespace Bricks
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            player = new Player(3);
-            level = new Level1(ScreenManager.Game, content);
+            player = new Player(1);
+            LoadLevels();
             ball = new Ball(content);
             paddle = new Paddle(content);
-            hud = new Hud(content, level.Name, player.Lives, player.Score);
+            LoadNextLevel();
+            hud = new Hud(content, currentLevel.Name, player.Lives, player.Score);
 
             base.LoadContent();
         }
@@ -70,11 +73,20 @@ namespace Bricks
         {
             ball.Update(gameTime);
             paddle.Update(gameTime);
-            level.Update(gameTime);
-            hud.Update(gameTime, player.Score, player.Lives);
+            hud.Update(gameTime, player.Score, player.Lives, currentLevel.Name);
             UpdateCollisions();
-            level.RemoveBricks();
-            level.VictoryCheck();
+            currentLevel.Update(gameTime);
+
+            if (player.isGameOver())
+            {
+                ScreenManager.AddScreen(new GameOverScreen());
+                ScreenManager.RemoveScreen(this);
+            }
+
+            if (currentLevel.IsLevelFinished())
+            {
+                LoadNextLevel();
+            }
 
             base.Update(gameTime, shouldTransitionOff);
         }
@@ -86,7 +98,7 @@ namespace Bricks
 
             ball.Draw(ScreenManager.SpriteBatch);
             paddle.Draw(ScreenManager.SpriteBatch);
-            level.Draw(ScreenManager.SpriteBatch);
+            currentLevel.Draw(ScreenManager.SpriteBatch);
             hud.Draw(ScreenManager.SpriteBatch);
 
             ScreenManager.SpriteBatch.End();
@@ -96,16 +108,48 @@ namespace Bricks
         private void UpdateCollisions()
         {
             paddle.CheckForCollisionAtScreenBoundries(ScreenManager.GraphicsDevice.Viewport.Width);
-            ball.CheckForCollisionAtScreenBoundries(ScreenManager.GraphicsDevice.Viewport.Width, ScreenManager.GraphicsDevice.Viewport.Height);
             ball.CheckForCollisionBetweenBallAndPaddle(paddle.BoundingRectangle);
-            
-            foreach (Brick brick in level.Bricks)
+
+            if (ball.CheckForCollisionAtScreenBoundries(ScreenManager.GraphicsDevice.Viewport.Width, ScreenManager.GraphicsDevice.Viewport.Height))
+            {
+                player.Lives -= 1;
+                ball.Reset();
+                paddle.Reset();
+            }
+
+            foreach (Brick brick in currentLevel.Bricks)
             {
                 if (ball.CheckForCollisionBetweenBallAndRectangle(brick.BoundingRectangle))
                 {
                     brick.Hit = true;
                     player.Score += brick.PointValue;
                 }
+            }
+        }
+
+        private void LoadLevels()
+        {
+            levels = new List<Level>();
+            levels.Add(new Level1(ScreenManager.Game, content));
+            levels.Add(new Level2(ScreenManager.Game, content));
+        }
+
+        private void LoadNextLevel()
+        {
+            if (currentLevel != null)
+            {
+                levelCounter++;
+            }
+            if (levels.Count > levelCounter)
+            {
+                currentLevel = levels[levelCounter];
+                ball.Reset();
+                paddle.Reset();
+            }
+            else
+            {
+                ScreenManager.AddScreen(new WinningScreen(player.Score));
+                ScreenManager.RemoveScreen(this);
             }
         }
     }

@@ -2,12 +2,12 @@ Implement new ball class to do better collision detection with bricks and paddle
 
 Create additional levels
 
-Make a 'level victory' check
-
-Load the next level when the first one is finished
-
 Create better art assets
+
+//Done - Make a 'level victory' check
+
+//Done - Load the next level when the first one is finished
 
 //Done - Redo paddle collisions to prevent the ball bouncing up from below the paddle
 
-//Done - When the game starts the ball should be stationary on the paddle. The player hits a button to launch it (Key.up?).
+//Done - When the game starts the ball should be stationary on the paddle. The player hits a button to launch it.

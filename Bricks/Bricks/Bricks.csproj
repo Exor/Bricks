@@ -112,6 +112,7 @@
     <Compile Include="Hud.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Levels\Level1.cs" />
+    <Compile Include="Levels\Level2.cs" />
     <Compile Include="Paddle.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="Screens\GameScreen.cs" />
     <Compile Include="Screens\PauseScreen.cs" />
     <Compile Include="Screens\TitleScreen.cs" />
+    <Compile Include="Screens\WinningScreen.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

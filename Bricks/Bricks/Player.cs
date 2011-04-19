@@ -14,5 +14,14 @@ namespace Bricks
         {
             Lives = lives;
         }
+
+        public bool isGameOver()
+        {
+            if (Lives == 0)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

@@ -11,9 +11,9 @@ namespace Bricks
     public class Ball
     {
         Texture2D ball;
-        Vector2 ballPosition = new Vector2(315, 890);
-        Vector2 ballDirection = new Vector2(0, 0);
-        int ballSpeed = 500;
+        Vector2 ballPosition;
+        Vector2 ballDirection;
+        int ballSpeed;
 
         public Rectangle BoundingRectangle
         {
@@ -28,6 +28,14 @@ namespace Bricks
         public Ball(ContentManager content)
         {
             LoadContent(content);
+            Reset();
+        }
+
+        public void Reset()
+        {
+            ballPosition = new Vector2(315, 890);
+            ballDirection = new Vector2(0, 0);
+            ballSpeed = 500;
         }
 
         public void LoadContent(ContentManager content)
@@ -71,7 +79,7 @@ namespace Bricks
             }
         }
 
-        public void CheckForCollisionAtScreenBoundries(int screenBoundryX, int screenBoundryY)
+        public bool CheckForCollisionAtScreenBoundries(int screenBoundryX, int screenBoundryY)
         {
             // boundary collision direction change (ball)
             if (ballPosition.X >= screenBoundryX - ball.Width)
@@ -84,16 +92,16 @@ namespace Bricks
                 ballPosition.X = 0;
                 ballDirection.X *= -1;
             }
-            if (ballPosition.Y >= screenBoundryY + ball.Height)
+            if (ballPosition.Y >= screenBoundryY - ball.Height)
             {
-                ballPosition.Y = screenBoundryY + ball.Height;
-                ballDirection.Y *= -1;
+                return true;
             }
             if (ballPosition.Y <= 0)
             {
                 ballPosition.Y = 0;
                 ballDirection.Y *= -1;
             }
+            return false;
         }
 
         public bool CheckForCollisionBetweenBallAndPaddle(Rectangle paddleRectangle)
