@@ -4,6 +4,10 @@ Create additional levels
 
 Create better art assets
 
+Implement backgrounds
+
+The pause screen should not cover the playing field
+
 //Done - Make a 'level victory' check
 
 //Done - Load the next level when the first one is finished
