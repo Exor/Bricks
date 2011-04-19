@@ -1,3 +1,7 @@
 The ball doesn't reflect properly when colliding with the corners of a brick or the paddle.
 
+Sometimes the ball hits the left side of the paddle and reflects in the wrong direction (to the right) and vice versa
+
+Sometimes the title gets stuck and stops getting bigger and smaller
+
 //Fixed - Ball bounces up from the bottom of the playfield. Instead it should subtract a life and reset.
