@@ -39,7 +39,13 @@ namespace XELibrary
         bool isExiting = false;
         public bool IsExiting { get; set; }
 
-
+        //Tells if the screet should overlay the previous one
+        bool isPopup = false;
+        public bool IsPopup
+        { 
+            get { return isPopup; }
+            set { value = isPopup; }
+        }
 
         public ScreenManager ScreenManager { get; set; }
 

@@ -20,8 +20,8 @@ namespace Bricks
 
         public TitleScreen()
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            TransitionOnTime = TimeSpan.FromSeconds(0.3);
+            TransitionOffTime = TimeSpan.FromSeconds(0.3);
         }
 
         public override void HandleInput(InputHandler input)
@@ -37,7 +37,10 @@ namespace Bricks
             origin = new Vector2(ScreenManager.Font.MeasureString(title).X/2, ScreenManager.Font.MeasureString(title).Y/2);
             scale += ((float)gameTime.ElapsedGameTime.TotalSeconds * direction);
             if (scale < 1 || scale > 2)
+            {
+                MathHelper.Clamp(scale, 1, 2);
                 direction *= -1;
+            }
             base.Update(gameTime, shouldTransitionOff);
         }
 

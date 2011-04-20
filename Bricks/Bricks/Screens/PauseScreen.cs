@@ -29,7 +29,7 @@ namespace Bricks
 
         public override void Draw(GameTime gameTime)
         {
-            ScreenManager.GraphicsDevice.Clear(Color.White);
+            //ScreenManager.GraphicsDevice.Clear(Color.White);
             ScreenManager.SpriteBatch.Begin();
 
             ScreenManager.SpriteBatch.DrawString(ScreenManager.Font, text,
@@ -37,7 +37,7 @@ namespace Bricks
                 Color.Black, 0, new Vector2(ScreenManager.Font.MeasureString(text).X / 2, 0), scale, SpriteEffects.None, 0);
 
             ScreenManager.SpriteBatch.End();
-            base.Draw(gameTime);
+            //base.Draw(gameTime);
         }
     }
 }

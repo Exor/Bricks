@@ -45,9 +45,12 @@ namespace Bricks
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(font, "Score: " + score.ToString(), scorePosition, Color.Black);
-            spriteBatch.DrawString(font, "Balls: " + lives.ToString(), livesPosition, Color.Black);
-            spriteBatch.DrawString(font, "Level " + levelName.ToString(), levelNamePosition, Color.Black);
+            spriteBatch.DrawString(font, "Score: " + score.ToString(), new Vector2(scorePosition.X-1, scorePosition.Y-1), Color.White);
+            spriteBatch.DrawString(font, "Score: " + score.ToString(), scorePosition, Color.MidnightBlue);
+            spriteBatch.DrawString(font, "Balls: " + lives.ToString(), new Vector2(livesPosition.X-1, livesPosition.Y-1), Color.White);
+            spriteBatch.DrawString(font, "Balls: " + lives.ToString(), livesPosition, Color.MidnightBlue);
+            spriteBatch.DrawString(font, "Level " + levelName.ToString(), new Vector2(levelNamePosition.X-1, levelNamePosition.Y-1), Color.White);
+            spriteBatch.DrawString(font, "Level " + levelName.ToString(), levelNamePosition, Color.MidnightBlue);
         }
     }
 }

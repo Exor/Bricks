@@ -19,17 +19,18 @@ namespace Bricks
 
         public override void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("brick");
+            brickTexture = content.Load<Texture2D>("brick");
+            background = content.Load<Texture2D>("Shiro");
 
-            //for (int i = 20; i < 590; i += 60)
-            //{
-            //    for (int j = 40; j < 300; j += 50)
-            //    {
-            //        bricks.Add(new Brick(texture, new Vector2(i, j), Color.Blue, 100));
-            //    }
-            //}
+            for (int i = 0; i < 640; i += brickTexture.Width)
+            {
+                for (int j = 40; j < 150; j += brickTexture.Height)
+                {
+                    bricks.Add(new Brick(brickTexture, new Vector2(i, j), Color.Blue, 100));
+                }
+            }
 
-            bricks.Add(new Brick(texture, new Vector2(10, 50), Color.Blue, 100));
+            //bricks.Add(new Brick(brickTexture, new Vector2(10, 50), Color.Blue, 100));
         }
     }
 }

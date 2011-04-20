@@ -17,8 +17,8 @@ namespace Bricks
 
         public WinningScreen()
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            TransitionOnTime = TimeSpan.FromSeconds(0.1);
+            TransitionOffTime = TimeSpan.FromSeconds(0.3);
         }
 
         public WinningScreen(int score)

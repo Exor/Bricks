@@ -24,8 +24,8 @@ namespace Bricks
 
         public GameScreen()
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            TransitionOnTime = TimeSpan.FromSeconds(0.1);
+            TransitionOffTime = TimeSpan.FromSeconds(0.1);
         }
 
         public override void LoadContent()
@@ -33,7 +33,7 @@ namespace Bricks
             if (content == null)
                 content = new ContentManager(ScreenManager.Game.Services, "Content");
 
-            player = new Player(1);
+            player = new Player(3);
             LoadLevels();
             ball = new Ball(content);
             paddle = new Paddle(content);
@@ -79,7 +79,7 @@ namespace Bricks
 
             if (player.isGameOver())
             {
-                ScreenManager.AddScreen(new GameOverScreen());
+                ScreenManager.AddScreen(new GameOverScreen(player.Score));
                 ScreenManager.RemoveScreen(this);
             }
 
@@ -96,9 +96,9 @@ namespace Bricks
             ScreenManager.GraphicsDevice.Clear(Color.White);
             ScreenManager.SpriteBatch.Begin();
 
+            currentLevel.Draw(ScreenManager.SpriteBatch);
             ball.Draw(ScreenManager.SpriteBatch);
             paddle.Draw(ScreenManager.SpriteBatch);
-            currentLevel.Draw(ScreenManager.SpriteBatch);
             hud.Draw(ScreenManager.SpriteBatch);
 
             ScreenManager.SpriteBatch.End();
@@ -132,6 +132,7 @@ namespace Bricks
             levels = new List<Level>();
             levels.Add(new Level1(ScreenManager.Game, content));
             levels.Add(new Level2(ScreenManager.Game, content));
+            levels.Add(new Level3(ScreenManager.Game, content));
         }
 
         private void LoadNextLevel()

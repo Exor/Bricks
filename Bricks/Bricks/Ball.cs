@@ -92,7 +92,7 @@ namespace Bricks
                 ballPosition.X = 0;
                 ballDirection.X *= -1;
             }
-            if (ballPosition.Y >= screenBoundryY - ball.Height)
+            if (ballPosition.Y >= screenBoundryY + ball.Height*3)
             {
                 return true;
             }
@@ -115,7 +115,7 @@ namespace Bricks
                     ballPosition.Y += ballOverlap.Y;
                     //bounce the ball up
                     ballDirection.Y *= -1;
-                    ballDirection.X = (ballPosition.X - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
+                    ballDirection.X = (ballPosition.X + (ball.Width/2) - paddleRectangle.Center.X) / (paddleRectangle.Width / 2);
                 }
                 else
                 {

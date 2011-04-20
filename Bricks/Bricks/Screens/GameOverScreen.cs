@@ -16,11 +16,18 @@ namespace Bricks
         float totalTimeOnScreen;
         float scale = 5;
         string text = "Game Over";
+        int finalScore;
+
+        public GameOverScreen(int score)
+            :base()
+        {
+            finalScore = score;
+        }
 
         public GameOverScreen()
         {
-            TransitionOnTime = TimeSpan.FromSeconds(0.0);
-            TransitionOffTime = TimeSpan.FromSeconds(0.0);
+            TransitionOnTime = TimeSpan.FromSeconds(0.1);
+            TransitionOffTime = TimeSpan.FromSeconds(0.3);
         }
 
         public override void HandleInput(InputHandler input)
@@ -45,6 +52,11 @@ namespace Bricks
             ScreenManager.SpriteBatch.DrawString(ScreenManager.Font, text,
                 new Vector2(ScreenManager.GraphicsDevice.Viewport.Width / 2, ScreenManager.GraphicsDevice.Viewport.Height /2),
                 Color.Black, 0, new Vector2(ScreenManager.Font.MeasureString(text).X / 2, 0), scale, SpriteEffects.None, 0);
+
+            ScreenManager.SpriteBatch.DrawString(ScreenManager.Font, "Your final score was " + finalScore.ToString() + " points",
+                new Vector2(ScreenManager.GraphicsDevice.Viewport.Width / 2, 650),
+                Color.Black, 0, new Vector2(ScreenManager.Font.MeasureString("Your final score was         points").X / 2, 0), 2, SpriteEffects.None, 0);
+
 
             ScreenManager.SpriteBatch.End();
             base.Draw(gameTime);

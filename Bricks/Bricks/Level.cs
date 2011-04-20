@@ -14,7 +14,8 @@ namespace Bricks
         protected List<Brick> bricks;
         List<Brick> bricksCopy = new List<Brick>();
         protected Game game;
-        protected Texture2D texture;
+        protected Texture2D brickTexture;
+        protected Texture2D background;
         protected string levelName;
 
         public string Name
@@ -48,7 +49,7 @@ namespace Bricks
 
         public virtual void LoadContent(ContentManager content)
         {
-            texture = content.Load<Texture2D>("brick");
+            brickTexture = content.Load<Texture2D>("brick");
         }
 
         public void Update(GameTime gameTime)
@@ -58,6 +59,7 @@ namespace Bricks
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(background, new Vector2(0, 0), Color.White);
             foreach (Brick brick in bricks)
             {
                 spriteBatch.Draw(brick.BrickTexture, brick.Position, brick.Color);
