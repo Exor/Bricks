@@ -1,12 +1,12 @@
 Implement new ball class to do better collision detection with bricks and paddle
 
-Create additional levels
-
-Create better art assets
-
-Implement backgrounds
-
 The pause screen should not cover the playing field
+
+//Done We have 3 - Create additional levels
+
+//Kinda done - Create better art assets
+
+//Done - Implement backgrounds
 
 //Done - Make a 'level victory' check
 
